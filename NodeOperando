@@ -1,0 +1,14 @@
+package projetoEstruturaDados;
+
+class NodeOperando extends NodeBase{
+
+	  public NodeOperando(char data, NodeOperador parent){
+	    super(data, parent);
+	  }
+	  
+	  @Override
+	  public float Visitar(){
+		String toString = Character.toString(getData());  
+	    return Float.parseFloat(toString);
+	  }
+}
