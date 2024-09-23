@@ -1,0 +1,73 @@
+package projetoEstruturaDados;
+
+//Leonardo Moreira dos Santos - 10417555
+//Kauê Henrique Matias Alves - 10417894
+import java.util.LinkedList;
+import java.util.Queue;
+class BinaryTree{
+
+	private NodeBase root;
+
+	public BinaryTree(NodeBase root) {
+		this.root = root;
+	}
+
+	public boolean isEmpty() {
+		return root == null;
+
+	}
+
+	
+
+	public int getHeight() {
+		if (isEmpty()) {
+			return -1;
+		}
+
+		return root.getHeight();
+	}
+
+	public void emOrdem() {
+		emOrdem(root);
+	}
+
+	private void emOrdem(NodeBase atual) {
+		if (atual != null) {
+			emOrdem(atual.getLeft());
+			System.out.print(atual.getData() + " ");
+			emOrdem(atual.getRight());
+		}
+	}
+
+	public void preOrdem() {
+		preOrdem(root);
+	}
+
+	private void preOrdem(NodeBase atual) {
+		if (atual != null) {
+			System.out.print(atual.getData() + " ");
+			preOrdem(atual.getLeft());
+			preOrdem(atual.getRight());
+		}
+	}
+
+	public void posOrdem() {
+		posOrdem(root);
+	}
+
+	private void posOrdem(NodeBase atual) {
+		if (atual != null) {
+			posOrdem(atual.getLeft());
+			posOrdem(atual.getRight());
+			System.out.print(atual.getData() + " ");
+		}
+	}
+
+	public NodeBase getRoot() {
+		return root;
+	}
+
+	public void setRoot(NodeBase root) {
+		this.root = root;
+	}
+}
