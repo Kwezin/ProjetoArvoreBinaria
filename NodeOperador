@@ -1,0 +1,32 @@
+package projetoEstruturaDados;
+
+class NodeOperador extends NodeBase{
+
+	  public NodeOperador(char data, NodeOperador parent, NodeOperando left, NodeOperando right){
+	    super(data, parent, left, right);
+	  }
+
+	  @Override
+	  public float Visitar(){
+	    float valor_esquerda, valor_direita;
+	    String toString = Character.toString(getLeft().getData());
+	    valor_esquerda = Float.parseFloat(toString);
+	    
+	    toString = Character.toString(getRight().getData());
+	    valor_direita = Float.parseFloat(toString);
+	    
+	    if (getData() == '+') {
+	        return valor_esquerda + valor_direita;
+	    } else if (getData() == '-') {
+	        return valor_esquerda - valor_direita;
+	    } else if (getData() == '*') {
+	        return valor_esquerda * valor_direita;
+	    } else { // Verificação para divisão
+	        if (valor_direita == 0) {
+	            System.out.print("Divisão por zero");
+	            return 0.0f;
+	        }
+	        return valor_esquerda / valor_direita;
+	  }
+	}
+}	  
