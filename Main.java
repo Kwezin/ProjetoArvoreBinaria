@@ -1,7 +1,8 @@
 package projetoEstruturaDados;
 
-//Leonardo Moreira dos Santos - 10417555
 //Kauê Henrique Matias Alves - 10417894
+//Matheus Alonso Varjão - 10417888
+//Leonardo Moreira dos Santos - 10417555
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -10,11 +11,17 @@ public static void main(String[] args) {
   
   Scanner scn = new Scanner(System.in);
   String expressao = "";
+  BinaryTree arvore = new BinaryTree();
+  boolean expressao_feita = true;
+  boolean arvore_criada = false;
+  
+
+  
   while (true){
     
     int resposta;
-    boolean expressao_feita = true;
-
+    
+    
     System.out.print("\n1. Entrada da expressão aritmética na notação infixa.\n2. Criação da árvore binária de expressão aritmética.\n3. Exibição da árvore binária de expressão aritmética.\n4. Cálculo da expressão (realizando o percurso da árvore).\n5. Encerramento do programa.\nSua escolha: ");
 
     resposta = scn.nextInt();
@@ -114,13 +121,9 @@ public static void main(String[] args) {
             }
         }
         System.out.print("\n\n\n");
-        BinaryTree arvore = new BinaryTree(root);
-        System.out.print("\n");
-        arvore.emOrdem();
-        System.out.print("\n");
-        arvore.posOrdem();
-        System.out.print("\n");
-        arvore.preOrdem();
+        arvore.setRoot(root);
+        arvore_criada = true;
+        
        
       }
       else{
@@ -129,10 +132,18 @@ public static void main(String[] args) {
       
     }
     else if(resposta == 3){
-      continue;
+      if(arvore_criada) {
+    	  System.out.print("\nEm Ordem: ");
+          arvore.emOrdem();
+          System.out.print("\nPós Ordem: ");
+          arvore.posOrdem();
+          System.out.print("\nPré Ordem: ");
+          arvore.preOrdem();
+      }
     }
     else if(resposta == 4){
-      continue;
+      float valor = arvore.percorreContando(); 
+      System.out.print("\n\n"+ valor);
     }
     else if(resposta == 5){
       break;
