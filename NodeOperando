@@ -1,5 +1,7 @@
 package projetoEstruturaDados;
-
+//Kauê Henrique Matias Alves - 10417894
+//Matheus Alonso Varjão - 10417888
+//Leonardo Moreira dos Santos - 10417555
 class NodeOperando extends NodeBase{
 
 	  public NodeOperando(char data, NodeOperador parent){
