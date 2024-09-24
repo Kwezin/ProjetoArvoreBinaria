@@ -1,6 +1,9 @@
 package projetoEstruturaDados;
-//Leonardo Moreira dos Santos - 10417555
+
+
 //Kauê Henrique Matias Alves - 10417894
+//Matheus Alonso Varjão - 10417888
+//Leonardo Moreira dos Santos - 10417555
 class NodeBase{
 
 	private char data;
