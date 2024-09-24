@@ -1,5 +1,6 @@
 package projetoEstruturaDados;
 
+import java.util.List;
 //Kauê Henrique Matias Alves - 10417894
 //Matheus Alonso Varjão - 10417888
 //Leonardo Moreira dos Santos - 10417555
@@ -12,7 +13,7 @@ public static void main(String[] args) {
   Scanner scn = new Scanner(System.in);
   String expressao = "";
   BinaryTree arvore = new BinaryTree();
-  boolean expressao_feita = true;
+  boolean expressao_feita = false;
   boolean arvore_criada = false;
   
 
@@ -32,11 +33,17 @@ public static void main(String[] args) {
       System.out.print("\nDigite a expressão infixa: ");
       expressao = scn.nextLine().replaceAll(" ", "");
       
+      VeryBasicTokenizer tokenizer = new VeryBasicTokenizer(expressao);
+      
+      List<String> tokens = tokenizer.tokenize();
 
-      /*
-      if(expressao valida){
-        expressao_feita = true;
-      }*/
+      // Verifica se houve erros na tokenização
+      if (tokens.isEmpty() || tokens.contains("Erro")) {
+          System.out.println("Expressão inválida.");
+      } else {
+          // Validação adicional (se necessário)
+    	  expressao_feita = true;
+      }
     }
     else if(resposta == 2){
       
@@ -119,15 +126,15 @@ public static void main(String[] args) {
                     root = noOperador;
                 }
             }
+            
         }
         System.out.print("\n\n\n");
         arvore.setRoot(root);
-        arvore_criada = true;
-        
+        arvore_criada = true;  
        
       }
       else{
-        System.out.print("Erro ao tentar criar árvore");
+        System.out.print("\nErro ao tentar criar árvore");
       }
       
     }
@@ -146,6 +153,7 @@ public static void main(String[] args) {
       System.out.print("\n\n"+ valor);
     }
     else if(resposta == 5){
+      System.out.print("\n\nEncerrando...");
       break;
     }
     
