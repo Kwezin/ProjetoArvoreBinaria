@@ -1,12 +1,17 @@
 package projetoEstruturaDados;
-
-//Leonardo Moreira dos Santos - 10417555
+//(3+6)*(4-1)+5
 //Kauê Henrique Matias Alves - 10417894
+//Matheus Alonso Varjão - 10417888
+//Leonardo Moreira dos Santos - 10417555
 import java.util.LinkedList;
 import java.util.Queue;
 class BinaryTree{
 
 	private NodeBase root;
+	
+	public BinaryTree() {
+		this.root = null;
+	}
 
 	public BinaryTree(NodeBase root) {
 		this.root = root;
@@ -15,6 +20,22 @@ class BinaryTree{
 	public boolean isEmpty() {
 		return root == null;
 
+	}
+	
+	public float percorreContando() {
+		return percorreContando(root);
+	}
+	
+	private float percorreContando(NodeBase atual) {
+		if(atual.isLeaf()) {
+			return atual.Visitar();
+		}
+		else {
+			float leftValue = percorreContando(atual.getLeft()); // Percorre o filho esquerdo
+	        float rightValue = percorreContando(atual.getRight());
+			return atual.Visitar();
+		}
+		
 	}
 
 	
