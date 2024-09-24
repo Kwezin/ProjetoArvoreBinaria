@@ -1,5 +1,7 @@
 package projetoEstruturaDados;
-
+//Kauê Henrique Matias Alves - 10417894
+//Matheus Alonso Varjão - 10417888
+//Leonardo Moreira dos Santos - 10417555
 class NodeOperador extends NodeBase{
 
 	  public NodeOperador(char data, NodeOperador parent, NodeOperando left, NodeOperando right){
@@ -8,19 +10,19 @@ class NodeOperador extends NodeBase{
 
 	  @Override
 	  public float Visitar(){
-	    float valor_esquerda, valor_direita;
-	    String toString = Character.toString(getLeft().getData());
-	    valor_esquerda = Float.parseFloat(toString);
-	    
-	    toString = Character.toString(getRight().getData());
-	    valor_direita = Float.parseFloat(toString);
+		  
+		 float valor_esquerda = getLeft().Visitar(); // Chama Visitar() no filho esquerdo
+	     float valor_direita = getRight().Visitar();
 	    
 	    if (getData() == '+') {
 	        return valor_esquerda + valor_direita;
+	        
 	    } else if (getData() == '-') {
 	        return valor_esquerda - valor_direita;
+	        
 	    } else if (getData() == '*') {
 	        return valor_esquerda * valor_direita;
+	        
 	    } else { // Verificação para divisão
 	        if (valor_direita == 0) {
 	            System.out.print("Divisão por zero");
