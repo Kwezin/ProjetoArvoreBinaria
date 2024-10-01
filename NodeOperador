@@ -4,8 +4,8 @@ package projetoEstruturaDados;
 //Leonardo Moreira dos Santos - 10417555
 class NodeOperador extends NodeBase{
 
-	  public NodeOperador(char data, NodeOperador parent, NodeOperando left, NodeOperando right){
-	    super(data, parent, left, right);
+	  public NodeOperador(String data, NodeOperando left, NodeOperando right){
+	    super(data,left, right);
 	  }
 
 	  @Override
@@ -14,18 +14,18 @@ class NodeOperador extends NodeBase{
 		 float valor_esquerda = getLeft().Visitar(); // Chama Visitar() no filho esquerdo
 	     float valor_direita = getRight().Visitar();
 	    
-	    if (getData() == '+') {
+	    if (getData().equals("+")) {
 	        return valor_esquerda + valor_direita;
 	        
-	    } else if (getData() == '-') {
+	    } else if (getData().equals("-")) {
 	        return valor_esquerda - valor_direita;
 	        
-	    } else if (getData() == '*') {
+	    } else if (getData().equals("*")) {
 	        return valor_esquerda * valor_direita;
 	        
 	    } else { // Verificação para divisão
 	        if (valor_direita == 0) {
-	            System.out.print("Divisão por zero");
+	            System.out.print("Impossivel divisão por zero");
 	            return 0.0f;
 	        }
 	        return valor_esquerda / valor_direita;
