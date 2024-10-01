@@ -6,20 +6,17 @@ package projetoEstruturaDados;
 //Leonardo Moreira dos Santos - 10417555
 class NodeBase{
 
-	private char data;
-	private NodeBase parent;
+	private String data;
 	private NodeBase left;
 	private NodeBase right;
 
-	public NodeBase(char data, NodeBase parent) {
+	public NodeBase(String data) {
 		this.data = data;
-		this.parent = parent;
 		this.left = null;
 		this.right = null;
 	}
-	public NodeBase(char data, NodeBase parent, NodeBase left, NodeBase right) {
+	public NodeBase(String data, NodeBase left, NodeBase right) {
 		this.data = data;
-		this.parent = parent;
 		this.left = left;
 		this.right = right;
 	}
@@ -28,63 +25,11 @@ class NodeBase{
 		return Float.NaN;
 	}
 
-	public boolean isRoot() {
-		return getParent() == null;
-	}
 
 	public boolean isLeaf() {
 		return hasLeft() == false && hasRight() == false;
 	}
 
-	public int getDegree() {
-		int grau = 0;
-
-		if (hasLeft() == true) {
-			grau++;
-		}
-		if (hasRight() == true) {
-			grau++;
-		}
-
-		return grau;
-	}
-
-	public int getLevel() {
-
-		if (parent == null) {
-			return 0;
-		}
-
-		return parent.getLevel() + 1;
-
-	}
-
-	public int getHeight() {
-		// Se o nó é uma folha, a altura é 0
-		if (isLeaf()) {
-			return 0;
-		}
-
-		int leftHeight = 0;
-		int rightHeight = 0;
-
-		// Se houver um filho à esquerda, calcular a altura do filho esquerdo
-		if (hasLeft()) {
-			leftHeight = getLeft().getHeight();
-		}
-
-		// Se houver um filho à direita, calcular a altura do filho direito
-		if (hasRight()) {
-			rightHeight = getRight().getHeight();
-		}
-
-		// Comparando as alturas dos filhos manualmente
-		if (leftHeight > rightHeight) {
-			return 1 + leftHeight;
-		} else {
-			return 1 + rightHeight;
-		}
-	}
 
 	public boolean hasLeft() {
 		return left != null;
@@ -94,21 +39,14 @@ class NodeBase{
 		return right != null;
 	}
 
-	public char getData() {
+	public String getData() {
 		return data;
 	}
 
-	public void setData(char data) {
+	public void setData(String data) {
 		this.data = data;
 	}
 
-	public NodeBase getParent() {
-		return parent;
-	}
-
-	public void setParent(NodeBase parent) {
-		this.parent = parent;
-	}
 
 	public NodeBase getLeft() {
 		return left;
