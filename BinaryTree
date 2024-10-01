@@ -3,17 +3,19 @@ package projetoEstruturaDados;
 //Kauê Henrique Matias Alves - 10417894
 //Matheus Alonso Varjão - 10417888
 //Leonardo Moreira dos Santos - 10417555
-import java.util.LinkedList;
-import java.util.Queue;
+
+import java.util.Stack;
+
+
 class BinaryTree{
 
-	private NodeBase root;
+	private NodeOperador root;
 	
 	public BinaryTree() {
 		this.root = null;
 	}
 
-	public BinaryTree(NodeBase root) {
+	public BinaryTree(NodeOperador root) {
 		this.root = root;
 	}
 
@@ -31,22 +33,68 @@ class BinaryTree{
 			return atual.Visitar();
 		}
 		else {
-			float leftValue = percorreContando(atual.getLeft()); // Percorre o filho esquerdo
-	        float rightValue = percorreContando(atual.getRight());
+			percorreContando(atual.getLeft()); // Percorre o filho esquerdo
+	        percorreContando(atual.getRight());
 			return atual.Visitar();
 		}
 		
 	}
-
 	
+	public boolean criaArvore(StringBuilder expressao_saida) {
+		// Construção da árvore
+        Stack<NodeBase> pilha2 = new Stack<>();
+        
+        
+        for (int j = 0; j < expressao_saida.length(); j++) {
+            char caractere = expressao_saida.charAt(j);
+            if (caractere == ' ') {
+                continue; // Ignora os espaços
+            }
+            // Se for um número, pode ser um operando com vários dígitos
+            if (Character.isDigit(caractere)) {
+                StringBuilder num = new StringBuilder();
+                
+                // Continua acumulando os dígitos até encontrar um espaço
+                while (j < expressao_saida.length() && expressao_saida.charAt(j) != ' ') {
+                    num.append(expressao_saida.charAt(j));
+                    j++;
+                }
+                j--;
+                // Empilha o operando completo
+                pilha2.push(new NodeOperando(num.toString()));
+                
+                
+            } else { 
 
-	public int getHeight() {
-		if (isEmpty()) {
-			return -1;
-		}
+            	// Cria o nó operador (ajustando o construtor)
+                NodeOperador noOperador = new NodeOperador(Character.toString(caractere), null, null);
 
-		return root.getHeight();
+                // Desempilha os dois últimos operandos ou operadores (usando NodeBase)
+                NodeBase noOperadorRight = pilha2.pop(); // Desempilha o operador ou operando da direita
+                NodeBase noOperadorLeft = pilha2.pop();  // Desempilha o operador ou operando da esquerda
+
+                // Define os filhos do nó operador
+                noOperador.setRight(noOperadorRight);
+                noOperador.setLeft(noOperadorLeft);
+
+                // Empilha o nó operador para uso posterior
+                pilha2.push(noOperador);
+            }
+        }
+     // O último elemento restante na pilha será o root
+        if (!pilha2.isEmpty()) {
+            root = (NodeOperador) pilha2.pop();
+        }
+
+        // Define o root na árvore
+        if (root != null) {
+            return true;
+        } else {
+            System.out.println("Erro ao criar a árvore.");
+            return false;
+        }
 	}
+
 
 	public void emOrdem() {
 		emOrdem(root);
@@ -84,11 +132,11 @@ class BinaryTree{
 		}
 	}
 
-	public NodeBase getRoot() {
+	public NodeOperador getRoot() {
 		return root;
 	}
 
-	public void setRoot(NodeBase root) {
+	public void setRoot(NodeOperador root) {
 		this.root = root;
 	}
 }
