@@ -4,13 +4,13 @@ package projetoEstruturaDados;
 //Leonardo Moreira dos Santos - 10417555
 class NodeOperando extends NodeBase{
 
-	  public NodeOperando(char data, NodeOperador parent){
-	    super(data, parent);
+	  public NodeOperando(String data){
+	    super(data);
 	  }
 	  
 	  @Override
 	  public float Visitar(){
-		String toString = Character.toString(getData());  
-	    return Float.parseFloat(toString);
+		  
+	    return Float.parseFloat(getData());
 	  }
 }
