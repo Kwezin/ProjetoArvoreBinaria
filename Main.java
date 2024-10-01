@@ -53,12 +53,13 @@ public class Main {
                         if (Character.isDigit(caractere)) {
                             StringBuilder numeroCompleto = new StringBuilder();
                             // Continua lendo até não haver mais dígitos
-                            while (i < expressao.length() && Character.isDigit(expressao.charAt(i))) {
+                            while (i < expressao.length() && (Character.isDigit(expressao.charAt(i)) || expressao.charAt(i) == '.' )) {
                                 numeroCompleto.append(expressao.charAt(i));
                                 i++;
                             }
                             i--; // Corrige o índice após o while para não pular um caractere
                             // Adiciona o número completo e um espaço na expressão pós-fixa
+                            
                             expressao_saida.append(numeroCompleto).append(" ");
                         } 
                         // Trata operadores de menor precedência (+ ou -)
@@ -95,59 +96,12 @@ public class Main {
                         expressao_saida.append(pilha.pop()).append(" ");
                     }
 
-                    System.out.println("Expressão Pós-fixa: " + expressao_saida);
-
-
-                    // Construção da árvore
-                    Stack<NodeBase> pilha2 = new Stack<>();
-                    NodeOperador root = null;
                     
-                    for (int j = 0; j < expressao_saida.length(); j++) {
-                        char caractere = expressao_saida.charAt(j);
-                        if (caractere == ' ') {
-                            continue; // Ignora os espaços
-                        }
-                        // Se for um número, pode ser um operando com vários dígitos
-                        if (Character.isDigit(caractere)) {
-                            StringBuilder num = new StringBuilder();
-                            num.append(caractere);
-                            // Continua acumulando os dígitos até encontrar um espaço
-                            while ((j + 1) < expressao_saida.length() && expressao_saida.charAt(j + 1) != ' ') {
-                                j++;
-                                num.append(expressao_saida.charAt(j));
-                            }
-                            // Empilha o operando completo
-                            pilha2.push(new NodeOperando(num.toString(), null));
-                            System.out.print("\n\n" + pilha2.peek().getData() + "\n\n");
-                            
-                        } else { 
 
-                        	// Cria o nó operador (ajustando o construtor)
-                            NodeOperador noOperador = new NodeOperador(Character.toString(caractere), null, null, null);
-
-                            // Desempilha os dois últimos operandos ou operadores (usando NodeBase)
-                            NodeBase noOperadorRight = pilha2.pop(); // Desempilha o operador ou operando da direita
-                            NodeBase noOperadorLeft = pilha2.pop();  // Desempilha o operador ou operando da esquerda
-
-                            // Define os filhos do nó operador
-                            noOperador.setRight(noOperadorRight);
-                            noOperador.setLeft(noOperadorLeft);
-
-                            // Empilha o nó operador para uso posterior
-                            pilha2.push(noOperador);
-                        }
-                    }
-
-                    // O último elemento restante na pilha será o root
-                    if (!pilha2.isEmpty()) {
-                        root = (NodeOperador) pilha2.pop();
-                    }
-
-                    // Define o root na árvore
-                    if (root != null) {
-                        arvore.setRoot(root);
-                        System.out.print("\n\n" + arvore.getRoot().getData() + "\n\n");
-                        arvore_criada = true;
+                    arvore_criada = arvore.criaArvore(expressao_saida);
+                    
+                    if (arvore_criada) {
+                    	System.out.println("Arvore criada com sucesso");
                     } else {
                         System.out.println("Erro ao criar a árvore.");
                     }
